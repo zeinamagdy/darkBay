@@ -29,6 +29,6 @@ export class Offer {
   @JoinColumn({ name: 'auctionId' })
   auction: Auction;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 }

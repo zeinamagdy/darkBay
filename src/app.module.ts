@@ -14,13 +14,14 @@ import { JwtGuard } from './auth/auth-jwt.guards';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: 'data/dark-bay.sqlite',
-      entities: [],
-      autoLoadEntities: true,
-      synchronize: true,
-      logging: false,
-      enableWAL: true,
+      type: 'postgres',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT, 10) || 5432,
+      username: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD || 'postgres',
+      database: process.env.DB_NAME || 'mydb',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true, // Auto-creates tables in dev; set to false in production
     }),
 
     AuctionModule,
